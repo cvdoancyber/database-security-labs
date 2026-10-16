@@ -452,7 +452,7 @@ Giải thích:
 
 ![](./images/7.png)
 
-### BƯỚC 8 – TẠO KIỂU DỮ LIỆU LIỆT KÊ (ENUM)
+### 8 – TẠO KIỂU DỮ LIỆU LIỆT KÊ (ENUM)
 
 - Tạo kiểu dữ liệu ENUM
 
@@ -491,20 +491,71 @@ Giải thích:
 SELECT unnest(enum_range(NULL::n3247_22_schema_lab1.n3247_22_enum));
 ```
 
+![](./images/8.png)
 
+### 9 – TẠO DOMAIN
 
-### BƯỚC 9 – TẠO DOMAIN
+- Tạo Domain với ràng buộc CHECK
 
-Tạo một Domain với tên:
+```sql
+CREATE DOMAIN n3247_22_schema_lab1.n3247_22_domain
+AS INTEGER
+CHECK (VALUE >= 100 AND VALUE <= 999);
+```
 
-`mã_nhóm_số_thứ_tự_domain`
+Giải thích:
 
-Yêu cầu:
+- `CREATE DOMAIN`: Lệnh tạo một miền dữ liệu tùy chỉnh.
+- `n3247_22_schema_lab1`: Schema chứa Domain.
+- `n3247_22_domain`: Tên Domain được tạo.
+- `AS INTEGER`: Sử dụng kiểu dữ liệu số nguyên.
+- `CHECK`: Thiết lập điều kiện kiểm tra giá trị.
+- `VALUE`: Đại diện cho giá trị được gán vào Domain.
+- `VALUE >= 100`: Giá trị phải lớn hơn hoặc bằng 100.
+- `AND`: Toán tử logic yêu cầu cả hai điều kiện đều đúng.
+- `VALUE <= 999`: Giá trị phải nhỏ hơn hoặc bằng 999.
 
-- Domain chỉ chấp nhận giá trị chứa đúng 3 chữ số.
-- Sử dụng điều kiện kiểm tra (`CHECK`) để xác thực dữ liệu.
+Như vậy, Domain chỉ chấp nhận các số nguyên dương có đúng 3 chữ số, từ `100` đến `999`, ngoài ra mặc định vẫn cho phép `NULL`.
 
-Mục tiêu là thực hành định nghĩa miền dữ liệu tùy chỉnh với các điều kiện kiểm tra hợp lệ.
+- Kiểm tra danh sách Domain
+
+```sql
+\dD n3247_22_schema_lab1.*
+```
+
+Giải thích:
+
+- `\dD`: Liệt kê các Domain trong PostgreSQL.
+- `n3247_22_schema_lab1`: Schema cần kiểm tra.
+- `*`: Hiển thị tất cả Domain phù hợp trong Schema.
+
+Các trường thông tin:
+
+| Trường      | Ý nghĩa                           |
+| ----------- | --------------------------------- |
+| `Schema`    | Schema chứa Domain.               |
+| `Name`      | Tên Domain.                       |
+| `Type`      | Kiểu dữ liệu cơ sở (`INTEGER`).   |
+| `Collation` | Quy tắc so sánh và sắp xếp ký tự. |
+| `Nullable`  | Ràng buộc cho phép giá trị NULL.  |
+| `Default`   | Giá trị mặc định.                 |
+| `Check`     | Điều kiện kiểm tra dữ liệu.       |
+
+- Kiểm tra điều kiện Domain
+
+```
+SELECT 123::n3247_22_schema_lab1.n3247_22_domain;
+```
+
+-> Hợp lệ vì `123` có đúng 3 chữ số.
+
+```
+SELECT 99::n3247_22_schema_lab1.n3247_22_domain;
+```
+
+-> Báo lỗi vì `99` nhỏ hơn `100`, không thỏa mãn điều kiện `CHECK`.
+
+![](./images/9.png)
 
 ### BƯỚC 10 – TẠO SEQUENCE
 
