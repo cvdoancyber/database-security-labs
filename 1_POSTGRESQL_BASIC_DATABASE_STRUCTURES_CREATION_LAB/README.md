@@ -242,19 +242,26 @@ View lấy dữ liệu từ bảng ở nhiệm vụ 5 và chỉ hiển thị cá
 - `VARCHAR`
 - `DATE`
 
-
-
-
+## 4. THỰC HÀNH
 
 ### BƯỚC 1 – KẾT NỐI POSTGRESQL
 
 Sử dụng công cụ dòng lệnh `psql` để kết nối đến hệ quản trị cơ sở dữ liệu PostgreSQL.
 
-Yêu cầu:
-
 - Khởi động PostgreSQL.
+
+```bash
+sudo systemctl enable --now postgresql.service
+
+```
+
 - Kết nối đến PostgreSQL bằng `psql`.
-- Kiểm tra kết nối thành công.
+
+```bash
+sudo su postgres -c psql
+```
+
+![](./images/1.png)
 
 ### BƯỚC 2 – TẠO CƠ SỞ DỮ LIỆU
 
