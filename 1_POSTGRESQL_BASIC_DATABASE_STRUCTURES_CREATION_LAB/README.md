@@ -454,17 +454,44 @@ Giải thích:
 
 ### BƯỚC 8 – TẠO KIỂU DỮ LIỆU LIỆT KÊ (ENUM)
 
-Tạo một kiểu dữ liệu ENUM với tên:
+- Tạo kiểu dữ liệu ENUM
 
-`mã_nhóm_số_thứ_tự_enum`
+```sql
+CREATE TYPE n3247_22_schema_lab1.n3247_22_enum
+AS ENUM ('big', 'medium', 'small');
+```
 
-Kiểu ENUM phải chứa ba giá trị biểu thị kích thước:
+Giải thích:
 
-- Lớn (Large)
-- Trung bình (Medium)
-- Nhỏ (Small)
+- `CREATE TYPE`: Tạo kiểu dữ liệu tùy chỉnh.
+- `n3247_22_schema_lab1`: Schema chứa kiểu dữ liệu.
+- `n3247_22_enum`: Tên kiểu dữ liệu ENUM.
+- `AS ENUM`: Khai báo kiểu dữ liệu liệt kê.
+- `'big'`: Kích thước lớn.
+- `'medium'`: Kích thước trung bình.
+- `'small'`: Kích thước nhỏ.
 
-Mục tiêu là giới hạn giá trị dữ liệu trong một tập hợp các giá trị được định nghĩa trước.
+> Kiểu ENUM chỉ cho phép sử dụng các giá trị đã được khai báo.
+
+- Kiểm tra danh sách kiểu dữ liệu
+
+```
+\dT n3247_22_schema_lab1.*
+```
+
+Giải thích:
+
+- `\dT`: Liệt kê các kiểu dữ liệu.
+- `n3247_22_schema_lab1`: Schema cần kiểm tra.
+- `*`: Hiển thị tất cả kiểu dữ liệu phù hợp.
+
+- Kiểm tra các giá trị ENUM
+
+```sql
+SELECT unnest(enum_range(NULL::n3247_22_schema_lab1.n3247_22_enum));
+```
+
+
 
 ### BƯỚC 9 – TẠO DOMAIN
 
