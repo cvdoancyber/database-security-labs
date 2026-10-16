@@ -374,8 +374,7 @@ Các trường thông tin hiển thị:
 
 ![](./images/5.png)
 
-### BƯỚC 6 – TẠO BẢNG VỚI DEFAULT VÀ INTERVAL
-
+### 6 – TẠO BẢNG VỚI DEFAULT VÀ INTERVAL
 
 - Tạo bảng với DEFAULT và INTERVAL
 
@@ -406,20 +405,52 @@ Giải thích:
 
 ![](./images/6.png)
 
-### BƯỚC 7 – TẠO KIỂU DỮ LIỆU TỔNG HỢP (COMPOSITE TYPE)
+### 7 – TẠO KIỂU DỮ LIỆU TỔNG HỢP (COMPOSITE TYPE)
 
-Tạo một kiểu dữ liệu tổng hợp với tên:
+Tạo một kiểu dữ liệu tổng hợp:
 
-`mã_nhóm_số_thứ_tự_type`
+```sql
+CREATE TYPE n3247_22_schema_lab1.n3247_22_type AS (
+    oldprice REAL,
+    newprice REAL,
+    dateofbirth DATE,
+    files BYTEA
+);
+```
 
-Kiểu dữ liệu này dùng để mô tả các thuộc tính của một đối tượng và phải bao gồm:
+Giải thích:
 
-- REAL
-- REAL
-- DATE
-- BYTEA
+- `CREATE TYPE`: Lệnh tạo kiểu dữ liệu tùy chỉnh.
+- `n3247_22_schema_lab1`: Schema chứa kiểu dữ liệu.
+- `n3247_22_type`: Tên kiểu dữ liệu tổng hợp.
+- `AS (...)`: Khai báo các thuộc tính của kiểu dữ liệu tổng hợp.
 
-Composite Type cho phép kết hợp nhiều thuộc tính có kiểu dữ liệu khác nhau thành một kiểu dữ liệu tùy chỉnh.
+| Thuộc tính    | Kiểu dữ liệu | Ý nghĩa                             |
+| ------------- | ------------ | ----------------------------------- |
+| `oldprice`    | `REAL`       | Lưu giá trị số thực, ví dụ giá cũ.  |
+| `newprice`    | `REAL`       | Lưu giá trị số thực, ví dụ giá mới. |
+| `dateofbirth` | `DATE`       | Lưu ngày, tháng, năm.               |
+| `files`       | `BYTEA`      | Lưu dữ liệu nhị phân.               |
+
+- Kiểm tra danh sách kiểu dữ liệu
+
+```
+\dT n3247_22_schema_lab1.*
+```
+
+Giải thích:
+
+- `\dT`: Liệt kê các kiểu dữ liệu.
+- `n3247_22_schema_lab1`: Schema cần kiểm tra.
+- `.*`: Hiển thị tất cả kiểu dữ liệu phù hợp trong Schema đó.
+
+- Để xem các thuộc tính bên trong kiểu dữ liệu tổng hợp, sử dụng:
+
+```
+\d n3247_22_schema_lab1.n3247_22_type
+```
+
+![](./images/7.png)
 
 ### BƯỚC 8 – TẠO KIỂU DỮ LIỆU LIỆT KÊ (ENUM)
 
