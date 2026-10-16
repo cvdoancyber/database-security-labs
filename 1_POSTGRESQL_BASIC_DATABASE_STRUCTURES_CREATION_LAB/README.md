@@ -67,6 +67,185 @@ Ví dụ:
 
 ## 3. NỘI DUNG THỰC HÀNH
 
+**1. KẾT NỐI ĐẾN CƠ SỞ DỮ LIỆU**
+
+Kết nối đến cơ sở dữ liệu bằng công cụ `psql`.
+
+**2. TẠO VÀ LỰA CHỌN CƠ SỞ DỮ LIỆU**
+
+Tạo cơ sở dữ liệu theo mẫu:
+
+`mã_nhóm_số_thứ_tự_sinh_viên`
+
+Lựa chọn cơ sở dữ liệu theo mẫu `mã_nhóm_số_thứ_tự_sinh_viên`.
+
+Ví dụ: `n3247_1`.
+
+**3. TẠO SCHEMA MỚI**
+
+Tạo một Schema mới trong cơ sở dữ liệu của mình với tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_schema_lab1`
+
+**4. TẠO BẢNG TRONG CÁC SCHEMA**
+
+Tạo bảng `mã_nhóm_số_thứ_tự_sinh_viên_tbl1` trong Schema mặc định và bảng `mã_nhóm_số_thứ_tự_sinh_viên_tbl2` trong Schema đã tạo ở nhiệm vụ 3.
+
+**5. TẠO BẢNG VỚI CÁC KIỂU DỮ LIỆU CƠ BẢN**
+
+Tạo bảng `mã_nhóm_số_thứ_tự_sinh_viên_table_i5` trong Schema của mình.
+
+Từ nhiệm vụ này trở đi, tất cả các đối tượng phải được tạo trong Schema đã tạo ở nhiệm vụ 3.
+
+Bảng phải sử dụng các thuộc tính với những kiểu dữ liệu sau:
+
+- `INTEGER`
+- `VARCHAR`
+- `CHAR`
+- `TIMESTAMP`
+- `DATE`
+- `BYTEA`
+
+**6. TẠO BẢNG VỚI GIÁ TRỊ MẶC ĐỊNH VÀ KIỂU DỮ LIỆU INTERVAL**
+
+Tạo bảng `mã_nhóm_số_thứ_tự_sinh_viên_table_i6`, trong đó có:
+
+- Một thuộc tính thuộc kiểu dữ liệu bất kỳ được thiết lập giá trị mặc định.
+- Một thuộc tính có kiểu dữ liệu khoảng thời gian (`INTERVAL`).
+
+**7. TẠO KIỂU DỮ LIỆU TỔNG HỢP**
+
+Tạo kiểu dữ liệu tổng hợp tùy chỉnh có tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_type`
+
+Kiểu dữ liệu này dùng để mô tả các thuộc tính của một đối tượng nào đó, bao gồm các thuộc tính có kiểu dữ liệu:
+
+- `REAL`
+- `REAL`
+- `DATE`
+- `BYTEA`
+
+**8. TẠO KIỂU DỮ LIỆU LIỆT KÊ**
+
+Tạo kiểu dữ liệu liệt kê tùy chỉnh có tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_enum`
+
+Kiểu dữ liệu này phải cho phép xác định mức phân loại kích thước theo ba giá trị:
+
+- Lớn
+- Trung bình
+- Nhỏ
+
+**9. TẠO DOMAIN VỚI ĐIỀU KIỆN KIỂM TRA**
+
+Tạo một Domain tùy chỉnh có tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_domain`
+
+Thiết lập điều kiện kiểm tra để đảm bảo giá trị trong Domain chỉ chứa đúng 3 chữ số.
+
+**10. TẠO SEQUENCE**
+
+Tạo một Sequence có tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_seq`
+
+Yêu cầu:
+
+- Giá trị bắt đầu: `1000`.
+- Bước thay đổi: `-1`.
+
+Dãy giá trị có dạng:
+
+`1000, 999, 998, ...`
+
+**11. TẠO INDEX TRÊN THUỘC TÍNH INTEGER**
+
+Tạo một Index cho bảng ở nhiệm vụ 5 với tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_idx1`
+
+Index được tạo trên thuộc tính có kiểu dữ liệu `INTEGER`.
+
+**12. TẠO INDEX KẾT HỢP**
+
+Tạo một Index kết hợp cho bảng ở nhiệm vụ 5 với tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_idx2`
+
+Index được tạo trên hai thuộc tính có kiểu dữ liệu:
+
+- `INTEGER`
+- `DATE`
+
+**13. TẠO INDEX THEO BIỂU THỨC**
+
+Tạo một Index theo biểu thức cho bảng ở nhiệm vụ 5 với tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_idx3`
+
+Index được tạo trên thuộc tính có kiểu dữ liệu `INTEGER`, sử dụng biểu thức chia lấy dư cho 10.
+
+**14. TẠO INDEX MỘT PHẦN**
+
+Tạo một Index một phần cho bảng ở nhiệm vụ 5 với tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_idx4`
+
+Index được tạo trên thuộc tính có kiểu dữ liệu `INTEGER`, loại trừ các giá trị nhỏ hơn 100 và lớn hơn 1000.
+
+**15. TẠO BẢNG VỚI RÀNG BUỘC NOT NULL**
+
+Tạo một bảng có cấu trúc giống bảng ở nhiệm vụ 5, nhưng bổ sung ràng buộc `NOT NULL` trên trường có kiểu dữ liệu `CHAR`.
+
+Tên bảng:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_notnull`
+
+**16. TẠO BẢNG VỚI RÀNG BUỘC UNIQUE**
+
+Tạo một bảng có cấu trúc giống bảng ở nhiệm vụ 5, nhưng bổ sung ràng buộc `UNIQUE` trên tổ hợp hai trường có kiểu dữ liệu:
+
+- `CHAR`
+- `INTEGER`
+
+Tên bảng:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_unique`
+
+**17. TẠO BẢNG VỚI RÀNG BUỘC PRIMARY KEY**
+
+Tạo một bảng có cấu trúc giống bảng ở nhiệm vụ 5, nhưng bổ sung ràng buộc khóa chính (`PRIMARY KEY`) trên trường có kiểu dữ liệu `INTEGER`.
+
+Tên bảng:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_pk`
+
+**18. TẠO BẢNG VỚI RÀNG BUỘC CHECK**
+
+Tạo một bảng có cấu trúc giống bảng ở nhiệm vụ 5, nhưng bổ sung ràng buộc `CHECK` trên trường có kiểu dữ liệu `VARCHAR` để kiểm tra sự tồn tại của ký tự `a`.
+
+Tên bảng:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_check`
+
+**19. TẠO VIEW**
+
+Tạo một View có tên:
+
+`mã_nhóm_số_thứ_tự_sinh_viên_view`
+
+View lấy dữ liệu từ bảng ở nhiệm vụ 5 và chỉ hiển thị các thuộc tính có kiểu dữ liệu:
+
+- `VARCHAR`
+- `DATE`
+
+
+
+
+
 ### BƯỚC 1 – KẾT NỐI POSTGRESQL
 
 Sử dụng công cụ dòng lệnh `psql` để kết nối đến hệ quản trị cơ sở dữ liệu PostgreSQL.
