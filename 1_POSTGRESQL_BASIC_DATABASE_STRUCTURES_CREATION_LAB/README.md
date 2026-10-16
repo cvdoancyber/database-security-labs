@@ -3,8 +3,6 @@
 
 ## GIỚI THIỆU
 
-Trong hệ quản trị cơ sở dữ liệu PostgreSQL, việc xây dựng các thành phần cấu trúc cơ bản là bước quan trọng để tổ chức, lưu trữ và quản lý dữ liệu.
-
 Bài LAB này tập trung vào việc thực hành tạo và quản lý các đối tượng trong PostgreSQL, bao gồm:
 
 - Database (Cơ sở dữ liệu)
@@ -18,8 +16,6 @@ Bài LAB này tập trung vào việc thực hành tạo và quản lý các đ�
 - Index (Chỉ mục)
 - Constraints (Ràng buộc dữ liệu)
 - View (Khung nhìn)
-
-Thông qua bài thực hành, chúng ta sẽ hiểu cách tổ chức cấu trúc cơ sở dữ liệu, khai báo các kiểu dữ liệu, xây dựng chỉ mục và áp dụng các ràng buộc nhằm đảm bảo tính toàn vẹn của dữ liệu.
 
 ---
 
@@ -47,7 +43,7 @@ Thông qua bài thực hành, chúng ta sẽ hiểu cách tổ chức cấu trú
 | Đối tượng thực hành | Database, Schema, Table, Index, View |
 | Nội dung chính | Xây dựng cấu trúc cơ sở dữ liệu |
 
-### Quy tắc đặt tên
+**Quy tắc đặt tên**
 
 Các đối tượng được đặt tên theo mẫu:
 
@@ -61,11 +57,9 @@ Ví dụ:
 - Index: `n3247_1_idx1`
 - View: `n3247_1_view`
 
-**Lưu ý:** Thay `n3247_1` bằng mã nhóm và số thứ tự sinh viên tương ứng.
-
 ---
 
-## 3. NỘI DUNG THỰC HÀNH
+## 3. NHIỆM VỤ
 
 **1. KẾT NỐI ĐẾN CƠ SỞ DỮ LIỆU**
 
@@ -382,16 +376,35 @@ Các trường thông tin hiển thị:
 
 ### BƯỚC 6 – TẠO BẢNG VỚI DEFAULT VÀ INTERVAL
 
-Tạo bảng:
 
-`mã_nhóm_số_thứ_tự_table_i6`
+- Tạo bảng với DEFAULT và INTERVAL
 
-Yêu cầu:
+```sql
+CREATE TABLE n3247_22_schema_lab1.n3247_22_table_i6(
+    number INTEGER DEFAULT 0,
+    livestream INTERVAL
+);
+```
 
-- Có ít nhất một thuộc tính sử dụng giá trị mặc định (`DEFAULT`).
-- Có một thuộc tính sử dụng kiểu dữ liệu khoảng thời gian (`INTERVAL`).
+Giải thích:
 
-Mục đích là tìm hiểu cơ chế tự động gán giá trị mặc định và lưu trữ khoảng thời gian trong PostgreSQL.
+- `CREATE TABLE`: Lệnh tạo bảng mới.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_table_i6`: Tên bảng được tạo.
+- `number INTEGER DEFAULT 0`: Cột kiểu số nguyên, có giá trị mặc định bằng `0` nếu không được cung cấp giá trị khi thêm bản ghi.
+- `livestream INTERVAL`: Cột lưu khoảng thời gian, ví dụ `2 days`, `3 hours`, `30 minutes`.
+
+- Kiểm tra cấu trúc bảng
+
+```
+\d n3247_22_schema_lab1.n3247_22_table_i6
+```
+
+- `\d`: Hiển thị cấu trúc bảng.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_table_i6`: Bảng cần kiểm tra.
+
+![](./images/6.png)
 
 ### BƯỚC 7 – TẠO KIỂU DỮ LIỆU TỔNG HỢP (COMPOSITE TYPE)
 
