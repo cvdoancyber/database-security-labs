@@ -557,25 +557,63 @@ SELECT 99::n3247_22_schema_lab1.n3247_22_domain;
 
 ![](./images/9.png)
 
-### BƯỚC 10 – TẠO SEQUENCE
+### 10 – TẠO SEQUENCE
 
-Tạo một Sequence với tên:
+- Tạo Sequence
 
-`mã_nhóm_số_thứ_tự_seq`
+```sql
+CREATE SEQUENCE n3247_22_schema_lab1.n3247_22_seq
+AS INTEGER
+INCREMENT -1
+MAXVALUE 1000
+START 1000;
+```
 
-Yêu cầu:
+Giải thích:
 
-- Giá trị bắt đầu: `1000`
-- Bước thay đổi: `-1`
-- Các giá trị được sinh theo thứ tự giảm dần.
+- `CREATE SEQUENCE`: Lệnh tạo một đối tượng sinh dãy số tự động.
+- `n3247_22_schema_lab1`: Schema chứa Sequence.
+- `n3247_22_seq`: Tên Sequence được tạo.
+- `AS INTEGER`: Xác định kiểu dữ liệu của dãy số là số nguyên.
+- `INCREMENT -1`: Mỗi lần sinh giá trị mới sẽ giảm đi 1.
+- `MAXVALUE 1000`: Thiết lập giá trị lớn nhất của dãy là 1000.
+- `START 1000`: Thiết lập giá trị khởi đầu là 1000.
 
-Ví dụ:
+- Lấy giá trị tiếp theo của Sequence
 
-`1000 → 999 → 998 → 997 → ...`
+```sql
+SELECT nextval('n3247_22_schema_lab1.n3247_22_seq');
+```
 
-Sequence được sử dụng để tự động sinh ra các giá trị số theo quy tắc xác định.
+Giải thích:
 
----
+- `SELECT`: Truy vấn dữ liệu.
+- `nextval()`: Hàm lấy giá trị tiếp theo từ Sequence và cập nhật trạng thái của dãy.
+- `'n3247_22_schema_lab1.n3247_22_seq'`: Tên Sequence cần lấy giá trị.
+
+![](./images/10png)
+
+- Kiểm tra danh sách Sequence
+
+```
+\ds n3247_22_schema_lab1.*
+```
+
+Trong đó:
+
+- `\ds`: Hiển thị danh sách Sequence.
+- `n3247_22_schema_lab1`: Schema cần kiểm tra.
+- `*`: Hiển thị tất cả Sequence trong Schema đó.
+
+![](./images/10.1.png)
+
+Để xem thông tin chi tiết:
+
+```
+\d n3247_22_schema_lab1.n3247_22_seq
+```
+
+![](./images/10.2.png)
 
 ## 4. THỰC HÀNH TẠO INDEX
 
