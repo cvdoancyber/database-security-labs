@@ -275,7 +275,7 @@ create database n3247_22;
 
 >`\l` (viết tắt của list) là lệnh dùng để hiển thị danh sách tất cả cơ sở dữ liệu trên PostgreSQL Server
 
-### BƯỚC 3 – TẠO SCHEMA
+### 3 – TẠO SCHEMA
 
 Schema được sử dụng để quản lý và phân nhóm các đối tượng trong cơ sở dữ liệu.
 
@@ -297,23 +297,33 @@ CREATE SCHEMA n3247_22_schema_lab1;
 
 > \dn: Lệnh trong psql dùng để liệt kê các Schema trong cơ sở dữ liệu hiện tại.
 
-### BƯỚC 4 – TẠO BẢNG TRONG CÁC SCHEMA
-
-Tạo hai bảng:
+### 4 – TẠO BẢNG TRONG CÁC SCHEMA
 
 **Bảng thứ nhất:**
 
-`mã_nhóm_số_thứ_tự_tbl1`
+```sql
+CREATE TABLE n3247_22_tbl1();
+```
 
 - Được tạo trong Schema mặc định của PostgreSQL.
 
 **Bảng thứ hai:**
 
-`mã_nhóm_số_thứ_tự_tbl2`
+```sql
+CREATE TABLE n3247_22_schema_lab1.n3247_22_tbl2();
+```
 
 - Được tạo trong Schema đã thiết lập ở bước 3.
 
-Mục đích là tìm hiểu cách quản lý các bảng thuộc những Schema khác nhau.
+![](./images/4.png)
+
+> \dt: Lệnh trong psql dùng để liệt kê các bảng thuộc những Schema được hiển thị theo search_path.
+
+- Kiểm tra bảng trong Schema cụ thể
+
+```sql
+\dt n3247_22_schema_lab1.*
+```
 
 ### BƯỚC 5 – TẠO BẢNG VỚI CÁC KIỂU DỮ LIỆU CƠ BẢN
 
