@@ -325,24 +325,60 @@ CREATE TABLE n3247_22_schema_lab1.n3247_22_tbl2();
 \dt n3247_22_schema_lab1.*
 ```
 
-### BƯỚC 5 – TẠO BẢNG VỚI CÁC KIỂU DỮ LIỆU CƠ BẢN
+### 5 – TẠO BẢNG VỚI CÁC KIỂU DỮ LIỆU CƠ BẢN
 
 Tạo bảng:
 
-`mã_nhóm_số_thứ_tự_table_i5`
+```sql
+CREATE TABLE n3247_22_schema_lab1.n3247_22_table_i5(
+    id INT,
+    fullName VARCHAR,
+    country CHAR,
+    testing TIMESTAMP,
+    dateOfBirth DATE,
+    files BYTEA
+);
+```
 
-Bảng phải có các thuộc tính sử dụng những kiểu dữ liệu sau:
+Giải thích:
 
-| Kiểu dữ liệu | Mô tả |
-|-------------|-------|
-| INTEGER | Số nguyên |
-| VARCHAR | Chuỗi ký tự có độ dài thay đổi |
-| CHAR | Chuỗi ký tự có độ dài cố định |
-| TIMESTAMP | Ngày và thời gian |
-| DATE | Ngày tháng |
-| BYTEA | Dữ liệu nhị phân |
+- `CREATE TABLE`: Lệnh tạo bảng mới.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_table_i5`: Tên bảng được tạo.
+- `()`: Chứa danh sách các cột và kiểu dữ liệu tương ứng.
 
-Mục tiêu là thực hành khai báo và sử dụng các kiểu dữ liệu cơ bản trong PostgreSQL.
+| Tên cột       | Kiểu dữ liệu | Ý nghĩa                                                     |
+| ------------- | ------------ | ----------------------------------------------------------- |
+| `id`          | `INT`        | Lưu số nguyên, tương đương `INTEGER`.                       |
+| `fullName`    | `VARCHAR`    | Lưu chuỗi ký tự có độ dài thay đổi.                         |
+| `country`     | `CHAR`       | Lưu chuỗi có độ dài cố định, mặc định 1 ký tự.              |
+| `testing`     | `TIMESTAMP`  | Lưu ngày và thời gian, không bao gồm múi giờ.               |
+| `dateOfBirth` | `DATE`       | Lưu ngày, tháng, năm.                                       |
+| `files`       | `BYTEA`      | Lưu dữ liệu nhị phân, chẳng hạn nội dung tệp hoặc hình ảnh. |
+
+- Kiểm tra cấu trúc bảng
+
+```sql
+\d n3247_22_schema_lab1.n3247_22_table_i5
+```
+
+Giải thích:
+
+- `\d`: Lệnh trong `psql` dùng để hiển thị cấu trúc của đối tượng cơ sở dữ liệu.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_table_i5`: Tên bảng cần kiểm tra.
+
+Các trường thông tin hiển thị:
+
+| Trường      | Ý nghĩa                                       |
+| ----------- | --------------------------------------------- |
+| `Column`    | Tên các cột trong bảng.                       |
+| `Type`      | Kiểu dữ liệu của từng cột.                    |
+| `Collation` | Quy tắc so sánh và sắp xếp chuỗi ký tự.       |
+| `Nullable`  | Thông tin về ràng buộc cho phép giá trị NULL. |
+| `Default`   | Giá trị mặc định của cột.                     |
+
+![](./images/5.png)
 
 ### BƯỚC 6 – TẠO BẢNG VỚI DEFAULT VÀ INTERVAL
 
