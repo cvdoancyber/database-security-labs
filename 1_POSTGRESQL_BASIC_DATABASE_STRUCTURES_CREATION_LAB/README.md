@@ -244,7 +244,7 @@ View lấy dữ liệu từ bảng ở nhiệm vụ 5 và chỉ hiển thị cá
 
 ## 4. THỰC HÀNH
 
-### BƯỚC 1 – KẾT NỐI POSTGRESQL
+### 1 – KẾT NỐI POSTGRESQL
 
 Sử dụng công cụ dòng lệnh `psql` để kết nối đến hệ quản trị cơ sở dữ liệu PostgreSQL.
 
@@ -263,17 +263,17 @@ sudo su postgres -c psql
 
 ![](./images/1.png)
 
-### BƯỚC 2 – TẠO CƠ SỞ DỮ LIỆU
+### 2 – TẠO CƠ SỞ DỮ LIỆU
 
-Tạo một cơ sở dữ liệu mới theo quy tắc:
+- Cú pháp tạo:
 
-`mã_nhóm_số_thứ_tự`
+```bash
+create database n3247_22;
+```
 
-Ví dụ:
+![](./images/2.png)
 
-`n3247_1`
-
-Sau khi tạo, thực hiện kết nối đến cơ sở dữ liệu vừa tạo để tiếp tục các bước thực hành.
+>`\l` (viết tắt của list) là lệnh dùng để hiển thị danh sách tất cả cơ sở dữ liệu trên PostgreSQL Server
 
 ### BƯỚC 3 – TẠO SCHEMA
 
