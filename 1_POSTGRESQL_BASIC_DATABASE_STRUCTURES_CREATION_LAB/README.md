@@ -267,7 +267,7 @@ sudo su postgres -c psql
 
 - Cú pháp tạo:
 
-```bash
+```sql
 create database n3247_22;
 ```
 
@@ -277,17 +277,25 @@ create database n3247_22;
 
 ### BƯỚC 3 – TẠO SCHEMA
 
-Tạo một Schema mới trong cơ sở dữ liệu với tên:
-
-`mã_nhóm_số_thứ_tự_schema_lab1`
-
-Ví dụ:
-
-`n3247_1_schema_lab1`
-
 Schema được sử dụng để quản lý và phân nhóm các đối tượng trong cơ sở dữ liệu.
 
-**Lưu ý:** Kể từ bước 5, tất cả các đối tượng phải được tạo trong Schema này.
+- Kết nối đến cơ sở dữ liệu:
+
+```sql
+\c n3247_22;
+```
+
+>\c: Viết tắt của \connect, dùng để kết nối hoặc chuyển sang một cơ sở dữ liệu khác.
+
+- Tạo Schema mới:
+
+```sql
+CREATE SCHEMA n3247_22_schema_lab1;
+```
+
+![](./images/3.png)
+
+> \dn: Lệnh trong psql dùng để liệt kê các Schema trong cơ sở dữ liệu hiện tại.
 
 ### BƯỚC 4 – TẠO BẢNG TRONG CÁC SCHEMA
 
