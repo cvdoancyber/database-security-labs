@@ -674,22 +674,34 @@ PostgreSQL mặc định sử dụng phương pháp B-tree.
 
 ![](./images/12.png)
 
-### 🔹 BƯỚC 13 – TẠO INDEX THEO BIỂU THỨC (EXPRESSION INDEX)
+### 13 – TẠO INDEX THEO BIỂU THỨC (EXPRESSION INDEX)
 
-Tạo Index với tên:
+```sql
+CREATE INDEX n3247_22_idx3
+ON n3247_22_schema_lab1.n3247_22_table_i5(mod(id, 10));
+```
 
-`mã_nhóm_số_thứ_tự_idx3`
+Giải thích:
 
-Yêu cầu:
+- `CREATE INDEX`: Lệnh tạo chỉ mục nhằm hỗ trợ tăng tốc độ truy vấn.
+- `n3247_22_idx3`: Tên Index được tạo.
+- `ON`: Chỉ định bảng cần tạo Index.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_table_i5`: Bảng đã tạo ở nhiệm vụ 5.
+- `mod(id, 10)`: Biểu thức tính phần dư khi chia giá trị cột `id` cho `10`.
 
-- Sử dụng thuộc tính kiểu `INTEGER`.
-- Biểu thức Index là phép chia lấy dư cho 10.
+Expression Index là chỉ mục được xây dựng dựa trên kết quả của một biểu thức hoặc hàm thay vì trực tiếp trên giá trị của cột.
 
-Biểu thức:
+Ví dụ:
 
-`integer_column % 10`
+| id   | mod(id, 10) |
+| ---- | ----------- |
+| 123  | 3           |
+| 256  | 6           |
+| 789  | 9           |
+| 1000 | 0           |
 
-Mục tiêu là thực hành tạo chỉ mục dựa trên kết quả của một biểu thức thay vì giá trị trực tiếp của cột.
+![](./images/13.png)
 
 ### 🔹 BƯỚC 14 – TẠO PARTIAL INDEX
 
