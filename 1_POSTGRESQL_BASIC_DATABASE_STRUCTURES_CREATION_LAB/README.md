@@ -615,23 +615,41 @@ Trong đó:
 
 ![](./images/10.2.png)
 
-## 4. THỰC HÀNH TẠO INDEX
+### 11  TẠO INDEX ĐƠN
 
 Trong phần này, sử dụng bảng đã tạo ở bước 5:
 
-`mã_nhóm_số_thứ_tự_table_i5`
+```sql
+CREATE INDEX n3247_22_idx1
+ON n3247_22_schema_lab1.n3247_22_table_i5(id);
+```
 
-### 🔹 BƯỚC 11 – TẠO INDEX ĐƠN
+Giải thích:
 
-Tạo Index với tên:
+- `CREATE INDEX`: Lệnh tạo chỉ mục nhằm hỗ trợ tăng tốc độ truy vấn dữ liệu.
+- `n3247_22_idx1`: Tên Index được tạo.
+- `ON`: Chỉ định bảng cần tạo Index.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_table_i5`: Bảng đã tạo ở nhiệm vụ 5.
+- `(id)`: Cột được đánh Index, có kiểu dữ liệu `INTEGER`.
 
-`mã_nhóm_số_thứ_tự_idx1`
+PostgreSQL mặc định sử dụng phương pháp B-tree khi tạo Index mà không chỉ định phương pháp khác.
 
-Yêu cầu:
+- Kiểm tra Index
 
-- Index được tạo trên thuộc tính có kiểu dữ liệu `INTEGER`.
+Để kiểm tra Index vừa tạo, sử dụng:
 
-Mục tiêu là tìm hiểu cách xây dựng chỉ mục trên một cột dữ liệu.
+```
+\d n3247_22_schema_lab1.n3247_22_table_i5
+```
+
+Liệt kê các Index trong Schema:
+
+```
+\di n3247_22_schema_lab1.*
+```
+
+![](./images/11.png)
 
 ### 🔹 BƯỚC 12 – TẠO INDEX KẾT HỢP (COMPOSITE INDEX)
 
