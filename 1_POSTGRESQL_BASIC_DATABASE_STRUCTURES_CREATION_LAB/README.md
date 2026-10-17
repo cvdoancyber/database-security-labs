@@ -651,19 +651,28 @@ Liệt kê các Index trong Schema:
 
 ![](./images/11.png)
 
-### 🔹 BƯỚC 12 – TẠO INDEX KẾT HỢP (COMPOSITE INDEX)
+### 12 – TẠO INDEX KẾT HỢP (COMPOSITE INDEX)
 
-Tạo Index với tên:
+```sql
+CREATE INDEX n3247_22_idx2
+ON n3247_22_schema_lab1.n3247_22_table_i5(id, dateofbirth);
+```
 
-`mã_nhóm_số_thứ_tự_idx2`
+Giải thích:
 
-Yêu cầu:
+- `CREATE INDEX`: Lệnh tạo chỉ mục nhằm hỗ trợ tăng tốc độ truy vấn dữ liệu.
+- `n3247_22_idx2`: Tên Index được tạo.
+- `ON`: Chỉ định bảng cần tạo Index.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_table_i5`: Bảng đã tạo ở nhiệm vụ 5.
+- `id`: Cột thứ nhất, có kiểu dữ liệu `INTEGER`.
+- `dateofbirth`: Cột thứ hai, có kiểu dữ liệu `DATE`.
 
-- Index được xây dựng trên hai thuộc tính:
-  - INTEGER
-  - DATE
+Composite Index là chỉ mục được xây dựng trên nhiều cột, giúp tối ưu một số truy vấn sử dụng đồng thời các cột đó.
 
-Mục tiêu là tìm hiểu cách tạo chỉ mục kết hợp trên nhiều cột.
+PostgreSQL mặc định sử dụng phương pháp B-tree.
+
+![](./images/12.png)
 
 ### 🔹 BƯỚC 13 – TẠO INDEX THEO BIỂU THỨC (EXPRESSION INDEX)
 
