@@ -739,7 +739,7 @@ Ví dụ:
 
 ![](./images/14.png)
 
-###  15 – RÀNG BUỘC DỮ LIỆU NOT NULL
+###  15 – TẠO BẢNG VỚI RÀNG BUỘC DỮ LIỆU NOT NULL
 
 ```sql
 CREATE TABLE n3247_22_schema_lab1.n3247_22_notnull(
@@ -788,105 +788,197 @@ ERROR:  null value in column "country" of relation "n3247_22_notnull" violates n
 
 ![](./images/15.png)
 
-### 🔹 BƯỚC 16 – RÀNG BUỘC UNIQUE
+### 16 – TẠO BẢNG VỚI RÀNG BUỘC UNIQUE
 
-Tạo bảng:
+```sql
+CREATE TABLE n3247_22_schema_lab1.n3247_22_unique (
+    id INTEGER,
+    fullname VARCHAR,
+    country CHAR,
+    testing TIMESTAMP,
+    dateofbirth DATE,
+    files BYTEA,
+    UNIQUE (country, id)
+);
+```
 
-`mã_nhóm_số_thứ_tự_unique`
+Giải thích:
 
-Yêu cầu:
+- `CREATE TABLE`: Tạo bảng mới.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_unique`: Tên bảng được tạo.
+- `id INTEGER`: Cột số nguyên.
+- `fullname VARCHAR`: Cột lưu chuỗi ký tự.
+- `country CHAR`: Cột lưu một ký tự.
+- `testing TIMESTAMP`: Cột lưu ngày và thời gian.
+- `dateofbirth DATE`: Cột lưu ngày tháng.
+- `files BYTEA`: Cột lưu dữ liệu nhị phân.
+- `UNIQUE (country, id)`: Đảm bảo không có hai bản ghi có cùng tổ hợp giá trị `country` và `id` (khi cả hai đều khác `NULL`).
 
-- Cấu trúc bảng tương tự bước 5.
-- Thiết lập ràng buộc `UNIQUE` trên tổ hợp hai thuộc tính:
-  - CHAR
-  - INTEGER
+- Kiểm tra cấu trúc bảng
 
-Mục tiêu là đảm bảo không có hai bản ghi có cùng tổ hợp giá trị trên hai cột được chỉ định.
+```
+\d n3247_22_schema_lab1.n3247_22_unique
+```
 
-### 🔹 BƯỚC 17 – RÀNG BUỘC PRIMARY KEY
+![](./images/16.png)
 
-Tạo bảng:
+Giải thích:
 
-`mã_nhóm_số_thứ_tự_pk`
+- `n3247_22_unique_country_id_key`: Tên ràng buộc được PostgreSQL tự động tạo.
+- `UNIQUE CONSTRAINT`: Ràng buộc duy nhất.
+- `btree`: Phương pháp chỉ mục B-tree.
+- `(country, id)`: Hai cột được kết hợp trong cùng một ràng buộc.
 
-Yêu cầu:
+- Ví dụ về hoạt động của UNIQUE
 
-- Cấu trúc bảng tương tự bước 5.
-- Thiết lập khóa chính (`PRIMARY KEY`) trên thuộc tính kiểu `INTEGER`.
+| country | id | Kết quả                     |
+| ------- | -- | --------------------------- |
+| A       | 1  | Hợp lệ                      |
+| A       | 2  | Hợp lệ                      |
+| B       | 1  | Hợp lệ                      |
+| A       | 1  | Không hợp lệ – trùng tổ hợp |
 
-Mục tiêu là đảm bảo mỗi bản ghi có một giá trị định danh duy nhất và không được NULL.
+### 17 – TẠO BẢNG VỚI RÀNG BUỘC PRIMARY KEY
 
-### 🔹 BƯỚC 18 – RÀNG BUỘC CHECK
+```sql
+CREATE TABLE n3247_22_schema_lab1.n3247_22_pk(
+    id INT PRIMARY KEY,
+    fullname VARCHAR,
+    country CHAR,
+    testing TIMESTAMP,
+    dateofbirth DATE,
+    files BYTEA
+);
+```
 
-Tạo bảng:
+Giải thích:
 
-`mã_nhóm_số_thứ_tự_check`
+- `CREATE TABLE`: Lệnh tạo bảng mới.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_pk`: Tên bảng được tạo.
+- `id INT PRIMARY KEY`: Cột số nguyên được thiết lập làm khóa chính.
+- `fullname VARCHAR`: Cột lưu chuỗi ký tự.
+- `country CHAR`: Cột lưu một ký tự.
+- `testing TIMESTAMP`: Cột lưu ngày và thời gian.
+- `dateofbirth DATE`: Cột lưu ngày tháng.
+- `files BYTEA`: Cột lưu dữ liệu nhị phân.
 
-Yêu cầu:
+PRIMARY KEY là ràng buộc khóa chính, có hai đặc điểm quan trọng:
 
-- Cấu trúc bảng tương tự bước 5.
-- Thiết lập ràng buộc `CHECK` trên thuộc tính kiểu `VARCHAR`.
-- Giá trị của thuộc tính phải chứa ký tự `a`.
+- UNIQUE: Không cho phép các giá trị khóa chính trùng nhau.
+- NOT NULL: Không cho phép khóa chính chứa giá trị `NULL`.
 
-Mục tiêu là thực hành kiểm tra tính hợp lệ của dữ liệu trước khi được lưu vào bảng.
+- Kiểm tra cấu trúc bảng
 
----
+```
+\d n3247_22_schema_lab1.n3247_22_pk
+```
+
+PostgreSQL tự động tạo một Unique Index để thực thi ràng buộc `PRIMARY KEY`.
+
+- Ví dụ hoạt động của PRIMARY KEY
+
+| id   | fullname     | Kết quả                                   |
+| ---- | ------------ | ----------------------------------------- |
+| 1    | Nguyen Van A | Hợp lệ                                    |
+| 2    | Nguyen Van B | Hợp lệ                                    |
+| 1    | Nguyen Van C | Không hợp lệ – trùng khóa chính           |
+| NULL | Nguyen Van D | Không hợp lệ – khóa chính không được NULL |
+
+![](./images/17.png)
+
+### 18 – TẠO BẢNG VỚI RÀNG BUỘC CHECK
+
+```sql
+CREATE TABLE n3247_22_schema_lab1.n3247_22_check (
+    id INTEGER,
+    fullname VARCHAR,
+    country CHAR,
+    testing TIMESTAMP,
+    dateofbirth DATE,
+    files BYTEA,
+    CHECK (strpos(fullname, 'a') > 0)
+);
+```
+
+- `CREATE TABLE`: Tạo bảng mới.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_check`: Tên bảng được tạo.
+- `fullname VARCHAR`: Cột chứa chuỗi ký tự có độ dài thay đổi.
+- `CHECK`: Ràng buộc kiểm tra tính hợp lệ của dữ liệu.
+- `strpos(fullname, 'a')`: Tìm vị trí xuất hiện đầu tiên của ký tự `a` trong cột `fullname`.
+- `> 0`: Điều kiện yêu cầu ký tự `a` phải xuất hiện trong chuỗi.
+
+Ví dụ:
+
+| Giá trị `fullname` | Kết quả      |
+| ------------------ | ------------ |
+| `Nam`              | Hợp lệ       |
+| `Lan`              | Hợp lệ       |
+| `Minh`             | Không hợp lệ |
+| `Hoa`              | Hợp lệ       |
+| `Binh`             | Không hợp lệ |
+
+- Kiểm tra cấu trúc bảng
+
+```
+\d n3247_22_schema_lab1.n3247_22_check
+```
+![](./images/18.png)
+
+- `Check constraints`: Danh sách các ràng buộc kiểm tra.
+- `n3247_22_check_fullname_check`: Tên ràng buộc PostgreSQL tự động tạo.
+- `fullname::text`: Chuyển giá trị cột `fullname` sang kiểu `TEXT`.
+- `'a'::text`: Chuyển ký tự `'a'` sang kiểu `TEXT`.
+- `strpos(...) > 0`: Kiểm tra sự tồn tại của ký tự `a`.
+
+Lưu ý: Ràng buộc này phân biệt chữ hoa và chữ thường, đồng thời vẫn cho phép `NULL` vì chưa khai báo `NOT NULL`.
 
 ## 6. TẠO VIEW
 
-### 🔹 BƯỚC 19 – TẠO KHUNG NHÌN (VIEW)
+```sql
+CREATE VIEW n3247_22_schema_lab1.n3247_22_view
+AS SELECT fullname, dateofbirth
+FROM n3247_22_schema_lab1.n3247_22_table_i5;
+```
 
-Tạo View với tên:
+- `CREATE VIEW`: Lệnh tạo khung nhìn (View) trong PostgreSQL.
+- `n3247_22_schema_lab1`: Schema chứa View.
+- `n3247_22_view`: Tên View được tạo.
+- `AS`: Xác định câu truy vấn SQL dùng để định nghĩa View.
+- `SELECT fullname, dateofbirth`: Chỉ lấy hai cột `fullname` và `dateofbirth`.
+- `FROM`: Chỉ định bảng nguồn.
+- `n3247_22_table_i5`: Bảng đã tạo ở nhiệm vụ 5.
 
-`mã_nhóm_số_thứ_tự_view`
+View là một bảng ảo được định nghĩa bằng câu truy vấn SQL. View thông thường không lưu trữ dữ liệu riêng mà truy xuất dữ liệu từ bảng nguồn khi được sử dụng.
 
-Yêu cầu:
+- Kiểm tra cấu trúc View
 
-- Nguồn dữ liệu được lấy từ bảng ở bước 5.
-- View chỉ hiển thị hai thuộc tính có kiểu dữ liệu:
-  - VARCHAR
-  - DATE
+```
+\d n3247_22_schema_lab1.n3247_22_view
+```
 
-Mục tiêu là tìm hiểu cách tạo một khung nhìn để truy xuất một phần dữ liệu của bảng mà không cần tạo bảng lưu trữ dữ liệu độc lập.
+Kết quả của bạn:
 
----
+| Column      | Type              |
+| ----------- | ----------------- |
+| fullname    | character varying |
+| dateofbirth | date              |
 
-## 7. KẾT QUẢ MONG ĐỢI
+Điều này xác nhận View chỉ chứa hai cột đúng theo yêu cầu:
 
-Sau khi hoàn thành bài LAB:
+- `fullname`: Kiểu dữ liệu `VARCHAR`.
+- `dateofbirth`: Kiểu dữ liệu `DATE`.
 
-- Kết nối thành công PostgreSQL thông qua `psql`.
-- Tạo được Database và Schema theo đúng quy tắc đặt tên.
-- Tạo các bảng với đầy đủ kiểu dữ liệu được yêu cầu.
-- Xây dựng được Composite Type, ENUM và Domain.
-- Tạo Sequence với giá trị bắt đầu và bước thay đổi xác định.
-- Tạo thành công bốn loại Index khác nhau.
-- Thiết lập được các ràng buộc NOT NULL, UNIQUE, PRIMARY KEY và CHECK.
-- Tạo View để truy xuất những thuộc tính được chỉ định.
-- Hiểu được cách tổ chức và quản lý các đối tượng cơ bản trong PostgreSQL.
+Để truy xuất dữ liệu từ View, sử dụng:
 
----
+```
+SELECT * FROM n3247_22_schema_lab1.n3247_22_view;
+```
 
-## 8. KIẾN THỨC ĐẠT ĐƯỢC
+Lệnh này hiển thị dữ liệu của hai cột `fullname` và `dateofbirth` từ bảng `n3247_22_table_i5`.
 
-Thông qua bài thực hành này, chúng ta có thể:
+Nếu bảng nguồn chưa có bản ghi, View sẽ trả về kết quả rỗng.
 
-1. **Quản lý cấu trúc cơ sở dữ liệu:** Tạo và tổ chức Database, Schema và Table.
-2. **Làm việc với kiểu dữ liệu:** Sử dụng các kiểu dữ liệu có sẵn và tự định nghĩa kiểu dữ liệu mới.
-3. **Tối ưu truy vấn:** Hiểu cách tạo chỉ mục đơn, chỉ mục kết hợp, chỉ mục theo biểu thức và chỉ mục có điều kiện.
-4. **Đảm bảo tính toàn vẹn dữ liệu:** Áp dụng các ràng buộc để kiểm soát dữ liệu hợp lệ.
-5. **Quản lý việc truy xuất dữ liệu:** Sử dụng View để biểu diễn những thông tin cần thiết từ bảng.
-
----
-
-## 9. KẾT LUẬN
-
-Bài LAB **PostgreSQL Basic Database Structures Creation** giúp củng cố kiến thức nền tảng về thiết kế và quản trị cơ sở dữ liệu quan hệ.
-
-Việc thực hành các thao tác tạo Database, Schema, Table, Data Type, Sequence, Index, Constraint và View là cơ sở để tiếp tục nghiên cứu những nội dung nâng cao như:
-
-- Quản trị và bảo mật cơ sở dữ liệu.
-- Tối ưu hóa hiệu năng truy vấn SQL.
-- Quản lý người dùng và phân quyền truy cập.
-- Sao lưu và phục hồi dữ liệu.
-- Giám sát và đảm bảo tính toàn vẹn của dữ liệu.
+![](./images/19.png)
