@@ -739,22 +739,54 @@ Ví dụ:
 
 ![](./images/14.png)
 
-## 5. THỰC HÀNH RÀNG BUỘC DỮ LIỆU
+###  15 – RÀNG BUỘC DỮ LIỆU NOT NULL
 
-Các bảng trong phần này có cấu trúc và kiểu dữ liệu tương tự bảng ở bước 5, nhưng được bổ sung những ràng buộc khác nhau.
+```sql
+CREATE TABLE n3247_22_schema_lab1.n3247_22_notnull(
+    id INT,
+    fullname VARCHAR,
+    country CHAR NOT NULL,
+    testing TIMESTAMP,
+    dateofbirth DATE,
+    files BYTEA
+);
+```
 
-### 🔹 BƯỚC 15 – RÀNG BUỘC NOT NULL
+Giải thích:
 
-Tạo bảng:
+- `CREATE TABLE`: Lệnh tạo bảng mới.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_notnull`: Tên bảng được tạo.
+- `id INT`: Cột số nguyên.
+- `fullname VARCHAR`: Cột chứa chuỗi ký tự có độ dài thay đổi.
+- `country CHAR NOT NULL`: Cột kiểu `CHAR`, bắt buộc phải có giá trị khác `NULL`.
+- `testing TIMESTAMP`: Cột lưu ngày và thời gian.
+- `dateofbirth DATE`: Cột lưu ngày tháng.
+- `files BYTEA`: Cột lưu dữ liệu nhị phân.
 
-`mã_nhóm_số_thứ_tự_notnull`
+NOT NULL là ràng buộc đảm bảo một cột không được chứa giá trị `NULL`.
 
-Yêu cầu:
+- Kiểm tra cấu trúc bảng
 
-- Cấu trúc bảng tương tự bước 5.
-- Thuộc tính kiểu `CHAR` phải có ràng buộc `NOT NULL`.
+```
+\d n3247_22_schema_lab1.n3247_22_notnull
+```
 
-Mục tiêu là đảm bảo cột dữ liệu bắt buộc phải có giá trị khi thêm hoặc cập nhật bản ghi.
+- Kiểm tra ràng buộc NOT NULL
+
+```
+INSERT INTO n3247_22_schema_lab1.n3247_22_notnull(id, fullname)
+VALUES (1, 'Nguyen Van A');
+```
+
+Do không cung cấp giá trị cho `country`, PostgreSQL sẽ báo lỗi:
+
+```sql
+ERROR:  null value in column "country" of relation "n3247_22_notnull" violates not-null constraint
+
+```
+
+![](./images/15.png)
 
 ### 🔹 BƯỚC 16 – RÀNG BUỘC UNIQUE
 
