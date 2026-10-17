@@ -703,25 +703,41 @@ Ví dụ:
 
 ![](./images/13.png)
 
-### 🔹 BƯỚC 14 – TẠO PARTIAL INDEX
+### 14 – TẠO INDEX MỘT PHẦN (PARTIAL INDEX)
 
-Tạo Index với tên:
+```sql
+CREATE INDEX n3247_22_idx4
+ON n3247_22_schema_lab1.n3247_22_table_i5(id)
+WHERE (id >= 100 AND id <= 1000);
+```
 
-`mã_nhóm_số_thứ_tự_idx4`
+Giải thích:
 
-Yêu cầu:
+- `CREATE INDEX`: Lệnh tạo chỉ mục nhằm hỗ trợ tăng tốc độ truy vấn dữ liệu.
+- `n3247_22_idx4`: Tên Index được tạo.
+- `ON`: Chỉ định bảng cần tạo Index.
+- `n3247_22_schema_lab1`: Schema chứa bảng.
+- `n3247_22_table_i5`: Bảng đã tạo ở nhiệm vụ 5.
+- `(id)`: Cột được đánh Index, có kiểu dữ liệu `INTEGER`.
+- `WHERE`: Xác định điều kiện để một bản ghi được đưa vào Index.
+- `id >= 100`: Chỉ lấy giá trị lớn hơn hoặc bằng 100.
+- `AND`: Toán tử logic yêu cầu cả hai điều kiện đều đúng.
+- `id <= 1000`: Chỉ lấy giá trị nhỏ hơn hoặc bằng 1000.
 
-- Index được tạo trên thuộc tính kiểu `INTEGER`.
-- Loại trừ các giá trị nhỏ hơn 100.
-- Loại trừ các giá trị lớn hơn 1000.
+Partial Index là chỉ mục chỉ chứa các bản ghi thỏa mãn điều kiện được xác định bởi mệnh đề `WHERE`.
 
-Điều kiện:
+Ví dụ:
 
-`integer_column >= 100 AND integer_column <= 1000`
+| Giá trị `id` | Có trong Partial Index? |
+| ------------ | ----------------------- |
+| 50           | Không                   |
+| 99           | Không                   |
+| 100          | Có                      |
+| 500          | Có                      |
+| 1000         | Có                      |
+| 1001         | Không                   |
 
-Mục tiêu là tìm hiểu cách tạo chỉ mục trên một tập hợp con của dữ liệu theo điều kiện xác định.
-
----
+![](./images/14.png)
 
 ## 5. THỰC HÀNH RÀNG BUỘC DỮ LIỆU
 
