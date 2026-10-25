@@ -148,3 +148,45 @@ VALUES
 ```
 
 ![](./images/1.png)
+
+## Nhiệm vụ 2. Cập nhật dữ liệu dựa trên bảng khác
+Sử dụng câu lệnh UPDATE để cập nhật các bản ghi trong một bảng dựa trên thông tin của bảng khác.
+
+Yêu cầu: Giữa hai bảng phải tồn tại mối quan hệ dữ liệu.
+
+```sql
+UPDATE works AS w
+SET work_name = 'Group_Project'
+FROM students AS s
+WHERE w.student_name = s.student_name
+AND s.student_group = 'N3248';
+```
+
+| Câu lệnh                                | Giải thích                                                                                          |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `UPDATE works AS w`                     | Chọn bảng `works` để cập nhật dữ liệu. `w` là bí danh của bảng.                                     |
+| `SET work_name = 'Group_Project'`       | Thay đổi giá trị cột `work_name` thành `Group_Project`.                                             |
+| `FROM students AS s`                    | Sử dụng dữ liệu từ bảng `students` để xác định những bản ghi cần cập nhật. `s` là bí danh của bảng. |
+| `WHERE w.student_name = s.student_name` | Liên kết hai bảng thông qua cột `student_name`. Chỉ xét những bản ghi có tên sinh viên trùng nhau.  |
+| `AND s.student_group = 'N3248'`         | Chỉ cập nhật công việc của những sinh viên thuộc nhóm `N3248`.                                      |
+
+![](./images/2.png)
+
+- Cách PostgreSQL thực hiện câu lệnh
+
+Bước 1: PostgreSQL sử dụng bảng `students` để tìm các sinh viên thuộc nhóm `N3248`.
+
+| id_student | student_name | student_group |
+| ---------- | ------------ | ------------- |
+| 3          | Anna         | N3248         |
+| 4          | Maria        | N3248         |
+
+Bước 2: Tìm các bản ghi trong bảng `works` có `student_name` tương ứng với Anna và Maria.
+
+Bước 3: Cập nhật `work_name` của hai sinh viên này thành `Group_Project`.
+
+Minh họa mối quan hệ giữa hai bảng
+
+![](./images/2.1.png)
+
+Liên kết qua student_name, lọc nhóm N3248 rồi cập nhật work_name.
