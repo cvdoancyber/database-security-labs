@@ -935,7 +935,7 @@ Ví dụ:
 
 Lưu ý: Ràng buộc này phân biệt chữ hoa và chữ thường, đồng thời vẫn cho phép `NULL` vì chưa khai báo `NOT NULL`.
 
-## 6. TẠO VIEW
+### 6 - TẠO VIEW
 
 ```sql
 CREATE VIEW n3247_22_schema_lab1.n3247_22_view

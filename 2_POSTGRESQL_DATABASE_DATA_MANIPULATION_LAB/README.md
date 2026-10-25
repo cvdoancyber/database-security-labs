@@ -1,0 +1,100 @@
+# POSTGRESQL DATABASE DATA MANIPULATION LAB
+
+## 1. GIỚI THIỆU
+
+Bài thực hành **Thao tác dữ liệu trong cơ sở dữ liệu** tập trung vào việc sử dụng các câu lệnh SQL để thêm, cập nhật, xóa, truy vấn và xử lý dữ liệu trong hệ quản trị cơ sở dữ liệu PostgreSQL.
+
+Thông qua bài thực hành, chúng ta làm quen với các thao tác quản lý dữ liệu, truy vấn dữ liệu từ nhiều bảng, sử dụng các điều kiện lọc, sắp xếp, hàm tổng hợp và truy vấn lồng nhau.
+
+## 2. MỤC TIÊU
+
+- Rèn luyện kỹ năng thao tác với dữ liệu trong cơ sở dữ liệu quan hệ.
+- Sử dụng các câu lệnh `INSERT`, `UPDATE`, `DELETE` và `SELECT`.
+- Thực hiện truy vấn dữ liệu dựa trên điều kiện và mối quan hệ giữa các bảng.
+- Sử dụng các hàm tổng hợp để thống kê và phân tích dữ liệu.
+- Áp dụng các kỹ thuật sắp xếp, nhóm dữ liệu và truy vấn con.
+- Củng cố kiến thức về ngôn ngữ SQL và hệ quản trị cơ sở dữ liệu PostgreSQL.
+
+## 3. CÔNG CỤ VÀ MÔI TRƯỜNG THỰC HÀNH
+
+| Thành phần | Mô tả |
+|---|---|
+| Hệ quản trị CSDL | PostgreSQL |
+| Ngôn ngữ truy vấn | SQL |
+| Hệ điều hành | Ubuntu Linux |
+| Công cụ thực hành | PostgreSQL CLI (`psql`) |
+| Cơ sở dữ liệu | `n3247_22` |
+| Schema | `n3247_22_schema_lab1` |
+
+## 4. NHIỆM VỤ
+
+### Nhiệm vụ 1. Thêm dữ liệu vào các bảng bằng INSERT
+
+Sử dụng câu lệnh `INSERT` để thêm dữ liệu vào các bảng trong cơ sở dữ liệu.
+
+**Yêu cầu:** Mỗi bảng phải chứa ít nhất **5 bản ghi khác nhau**.
+
+### Nhiệm vụ 2. Cập nhật dữ liệu dựa trên bảng khác
+
+Sử dụng câu lệnh `UPDATE` để cập nhật các bản ghi trong một bảng dựa trên thông tin của bảng khác.
+
+**Yêu cầu:** Giữa hai bảng phải tồn tại mối quan hệ dữ liệu.
+
+### Nhiệm vụ 3. Xóa dữ liệu dựa trên bảng khác
+
+Sử dụng câu lệnh `DELETE` để xóa nhiều bản ghi trong một bảng dựa trên thông tin được lưu trữ trong bảng khác.
+
+### Nhiệm vụ 4. Truy vấn một số cột trong bảng
+
+Sử dụng câu lệnh `SELECT` để hiển thị một số cột được chỉ định thay vì toàn bộ các cột trong bảng.
+
+### Nhiệm vụ 5. Truy vấn dữ liệu theo điều kiện
+
+Sử dụng câu lệnh `SELECT` kết hợp với mệnh đề `WHERE` để hiển thị những bản ghi thỏa mãn điều kiện xác định.
+
+### Nhiệm vụ 6. Thực hiện tích Descartes của hai bảng
+
+Thực hiện phép tích Descartes (*Cartesian Product*) giữa hai bảng bằng `CROSS JOIN` hoặc cú pháp tương đương.
+
+**Yêu cầu:** Kết quả chứa tất cả các tổ hợp bản ghi có thể có giữa hai bảng.
+
+### Nhiệm vụ 7. Truy vấn dữ liệu dựa trên điều kiện từ bảng khác
+
+Truy vấn các bản ghi trong một bảng dựa trên điều kiện được xác định bởi dữ liệu trong bảng khác.
+
+Có thể sử dụng `JOIN`, `IN`, `EXISTS` hoặc truy vấn con tùy theo cấu trúc cơ sở dữ liệu.
+
+### Nhiệm vụ 8. Sử dụng các hàm tổng hợp
+
+Áp dụng các hàm tổng hợp SQL đối với dữ liệu truy vấn.
+
+Các hàm cần sử dụng:
+
+- `SUM()` – Tính tổng giá trị.
+- `AVG()` – Tính giá trị trung bình.
+- `MIN()` – Xác định giá trị nhỏ nhất.
+- `MAX()` – Xác định giá trị lớn nhất.
+
+### Nhiệm vụ 9. Sắp xếp dữ liệu giảm dần
+
+Sử dụng mệnh đề `ORDER BY` kết hợp với `DESC` để hiển thị các bản ghi theo thứ tự từ lớn đến nhỏ.
+
+### Nhiệm vụ 10. Sắp xếp tăng dần và giới hạn số bản ghi
+
+Sử dụng `ORDER BY ASC` để sắp xếp dữ liệu theo thứ tự từ nhỏ đến lớn.
+
+Kết hợp với `LIMIT` để giới hạn số lượng dòng được hiển thị trong kết quả truy vấn.
+
+### Nhiệm vụ 11. Nhóm và tổng hợp dữ liệu bằng GROUP BY
+
+Sử dụng mệnh đề `GROUP BY` để nhóm các bản ghi theo giá trị của một trường dữ liệu.
+
+Thực hiện tổng hợp dữ liệu trên từng nhóm bằng các hàm tổng hợp SQL.
+
+### Nhiệm vụ 12. Thực hiện truy vấn lồng nhau
+
+Viết câu lệnh SQL trong đó biểu thức bảng được xác định bởi kết quả của một truy vấn khác.
+
+Sử dụng truy vấn con (*Subquery*) làm nguồn dữ liệu cho truy vấn chính.
+
+## 5. THỰC HÀNH
