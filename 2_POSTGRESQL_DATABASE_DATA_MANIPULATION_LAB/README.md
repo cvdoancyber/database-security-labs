@@ -24,7 +24,7 @@ Thông qua bài thực hành, chúng ta làm quen với các thao tác quản l�
 | Hệ điều hành | Ubuntu Linux |
 | Công cụ thực hành | PostgreSQL CLI (`psql`) |
 | Cơ sở dữ liệu | `n3247_22` |
-| Schema | `n3247_22_schema_lab1` |
+| Schema | `n3247_22_schema_lab2` |
 
 ## 4. NHIỆM VỤ
 
@@ -98,3 +98,53 @@ Viết câu lệnh SQL trong đó biểu thức bảng được xác định b�
 Sử dụng truy vấn con (*Subquery*) làm nguồn dữ liệu cho truy vấn chính.
 
 ## 5. THỰC HÀNH
+
+### Nhiệm vụ 1. Thêm dữ liệu vào các bảng bằng INSERT
+Sử dụng câu lệnh INSERT để thêm dữ liệu vào các bảng trong cơ sở dữ liệu.
+
+Yêu cầu: Mỗi bảng phải chứa ít nhất 5 bản ghi khác nhau.
+
+- Tạo bảng students:
+
+```sql
+CREATE TABLE IF NOT EXISTS students (
+    id_student INT PRIMARY KEY,
+    student_name VARCHAR NOT NULL,
+    student_group VARCHAR(20) NOT NULL
+);
+```
+- Tạo bảng works:
+
+```sql
+CREATE TABLE IF NOT EXISTS works (
+    id_work INT PRIMARY KEY,
+    work_name VARCHAR(20) NOT NULL,
+    student_name VARCHAR NOT NULL
+);
+```
+
+- Thêm 5 bản ghi vào bảng students:
+
+```sql
+INSERT INTO students (id_student, student_name, student_group)
+VALUES
+(1, 'Ivan', 'N3247'),
+(2, 'Petr', 'N3247'),
+(3, 'Anna', 'N3248'),
+(4, 'Maria', 'N3248'),
+(5, 'Alex', 'N3249');
+```
+
+- Thêm 5 bản ghi vào bảng works:
+
+```sql
+INSERT INTO works (id_work, work_name, student_name)
+VALUES
+(1, 'Database', 'Ivan'),
+(2, 'Network', 'Petr'),
+(3, 'Security', 'Anna'),
+(4, 'Programming', 'Maria'),
+(5, 'Linux', 'Alex');
+```
+
+![](./images/1.png)
