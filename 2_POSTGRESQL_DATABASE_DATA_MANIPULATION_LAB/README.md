@@ -280,3 +280,28 @@ Giải thích:
 
 ![](./images/7.png)
 
+### Nhiệm vụ 8. Sử dụng các hàm tổng hợp
+Áp dụng các hàm tổng hợp SQL đối với dữ liệu truy vấn.
+
+Các hàm cần sử dụng:
+
+SUM() – Tính tổng giá trị.
+AVG() – Tính giá trị trung bình.
+MIN() – Xác định giá trị nhỏ nhất.
+MAX() – Xác định giá trị lớn nhất.
+
+```sql
+SELECT
+    SUM(id_work) AS total,
+    AVG(id_work) AS average,
+    MIN(id_work) AS minimum,
+    MAX(id_work) AS maximum
+FROM works;
+```
+Giải thích
+- SUM(id_work): Tính tổng các giá trị ID: 1 + 2 + 5 = 8.
+- AVG(id_work): Tính trung bình: 8 / 3 ≈ 2.67.
+- MIN(id_work): Giá trị nhỏ nhất là 1.
+- MAX(id_work): Giá trị lớn nhất là 5.
+
+![](./images/8.png)
