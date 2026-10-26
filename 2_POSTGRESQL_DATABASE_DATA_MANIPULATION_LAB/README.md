@@ -226,3 +226,18 @@ FROM students;
 - FROM students: Lấy dữ liệu từ bảng students
 
 ![](./images/4.png)
+
+### Nhiệm vụ 5. Truy vấn dữ liệu theo điều kiện
+Sử dụng câu lệnh SELECT kết hợp với mệnh đề WHERE để hiển thị những bản ghi thỏa mãn điều kiện xác định.
+
+```sql
+SELECT *
+FROM students
+WHERE student_group = 'N3248';
+```
+
+- SELECT *: Lấy tất cả các cột.
+- FROM students: Truy vấn dữ liệu từ bảng students.
+- WHERE student_group = 'N3248': Chỉ lấy những bản ghi có nhóm là N3248.
+
+![](./images/5.png)
