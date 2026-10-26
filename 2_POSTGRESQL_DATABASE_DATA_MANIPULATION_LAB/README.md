@@ -210,3 +210,19 @@ AND s.student_group = 'N3248';
 - AND s.student_group = 'N3248': Chỉ xóa công việc của sinh viên thuộc nhóm N3248.
 
 ![](./images/3.png)
+
+### Nhiệm vụ 4. Truy vấn một số cột trong bảng
+Sử dụng câu lệnh SELECT để hiển thị một số cột được chỉ định thay vì toàn bộ các cột trong bảng.
+
+```sql
+SELECT student_name, student_group
+FROM students;
+```
+
+- SELECT: truy vấn dữ liệu
+
+- student_name, student_group: Chỉ định hai cột cần hiển thị
+
+- FROM students: Lấy dữ liệu từ bảng students
+
+![](./images/4.png)
