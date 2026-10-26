@@ -256,3 +256,27 @@ CROSS JOIN works;
 CROSS JOIN works: Kết hợp mỗi bản ghi trong students với tất cả bản ghi trong works
 
 ![](./images/6.png)
+
+### Nhiệm vụ 7. Truy vấn dữ liệu dựa trên điều kiện từ bảng khác
+Truy vấn các bản ghi trong một bảng dựa trên điều kiện được xác định bởi dữ liệu trong bảng khác.
+
+Có thể sử dụng JOIN, IN, EXISTS hoặc truy vấn con tùy theo cấu trúc cơ sở dữ liệu.
+
+```sql
+SELECT *
+FROM works
+WHERE student_name IN (
+    SELECT student_name
+    FROM students
+    WHERE student_group = 'N3247'
+);
+```
+
+Giải thích:
+- Truy vấn con tìm sinh viên thuộc nhóm N3247 trong bảng students.
+- Truy vấn chính lấy các công việc tương ứng trong bảng works.
+- IN kiểm tra tên sinh viên có thuộc tập kết quả truy vấn con hay không.
+- WHERE student_name IN (...): Chỉ lấy những sinh viên có tên thuộc kết quả truy vấn con
+
+![](./images/7.png)
+
