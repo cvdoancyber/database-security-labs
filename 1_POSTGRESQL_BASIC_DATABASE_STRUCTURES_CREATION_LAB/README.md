@@ -1,7 +1,7 @@
 
 # POSTGRESQL BASIC DATABASE STRUCTURES CREATION LAB
 
-## GIỚI THIỆU
+## 1. GIỚI THIỆU
 
 Bài LAB này tập trung vào việc thực hành tạo và quản lý các đối tượng trong PostgreSQL, bao gồm:
 
@@ -19,7 +19,7 @@ Bài LAB này tập trung vào việc thực hành tạo và quản lý các đ�
 
 ---
 
-## 1. MỤC TIÊU
+## 2. MỤC TIÊU
 
 - Làm quen với công cụ dòng lệnh `psql` của PostgreSQL.
 - Thực hành tạo và quản lý Database, Schema và Table.
@@ -32,7 +32,7 @@ Bài LAB này tập trung vào việc thực hành tạo và quản lý các đ�
 
 ---
 
-## 2. MÔI TRƯỜNG THỰC HÀNH
+## 3. MÔI TRƯỜNG THỰC HÀNH
 
 | Thành phần | Mô tả |
 |------------|-------|
@@ -59,7 +59,7 @@ Ví dụ:
 
 ---
 
-## 3. NHIỆM VỤ
+## 4. NHIỆM VỤ
 
 **1. KẾT NỐI ĐẾN CƠ SỞ DỮ LIỆU**
 
@@ -236,7 +236,7 @@ View lấy dữ liệu từ bảng ở nhiệm vụ 5 và chỉ hiển thị cá
 - `VARCHAR`
 - `DATE`
 
-## 4. THỰC HÀNH
+## 5. THỰC HÀNH
 
 ### 1 – KẾT NỐI POSTGRESQL
 
