@@ -321,3 +321,22 @@ Giải thích
 
 ![](./images/9.png)
 
+### Nhiệm vụ 10. Sắp xếp tăng dần và giới hạn số bản ghi
+Sử dụng ORDER BY ASC để sắp xếp dữ liệu theo thứ tự từ nhỏ đến lớn.
+
+Kết hợp với LIMIT để giới hạn số lượng dòng được hiển thị trong kết quả truy vấn.
+
+```sql
+SELECT *
+FROM works
+ORDER BY id_work ASC
+LIMIT 2;
+```
+
+Giải thích:
+
+- ORDER BY id_work ASC: Sắp xếp mã công việc tăng dần.
+
+- LIMIT 2: Chỉ lấy 2 bản ghi đầu tiên.
+
+![](./images/10.png)
