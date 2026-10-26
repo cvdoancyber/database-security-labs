@@ -340,3 +340,51 @@ Giải thích:
 - LIMIT 2: Chỉ lấy 2 bản ghi đầu tiên.
 
 ![](./images/10.png)
+
+### Nhiệm vụ 11. Nhóm và tổng hợp dữ liệu bằng GROUP BY
+Sử dụng mệnh đề GROUP BY để nhóm các bản ghi theo giá trị của một trường dữ liệu.
+
+Thực hiện tổng hợp dữ liệu trên từng nhóm bằng các hàm tổng hợp SQL.
+
+```sql
+SELECT
+    student_group,
+    COUNT(*) AS total_students
+FROM students
+GROUP BY student_group
+ORDER BY student_group;
+```
+
+Giải thích:
+
+- COUNT(*): Đếm số sinh viên trong mỗi nhóm
+- AS total_students: Đặt tên cho cột kết quả
+- GROUP BY student_group: Gom các sinh viên có cùng nhóm
+- ORDER BY student_group: Sắp xếp kết quả theo tên nhóm
+
+![](./images/11.png)
+
+### Nhiệm vụ 12. Thực hiện truy vấn lồng nhau
+Viết câu lệnh SQL trong đó biểu thức bảng được xác định bởi kết quả của một truy vấn khác.
+
+Sử dụng truy vấn con (Subquery) làm nguồn dữ liệu cho truy vấn chính.
+
+```sql
+SELECT *
+FROM (
+    SELECT
+        student_group,
+        COUNT(*) AS total_students
+    FROM students
+    GROUP BY student_group
+) AS group_statistics
+WHERE total_students >= 2;
+```
+
+Giải thích:
+
+- Truy vấn con: Đếm số sinh viên trong từng nhóm bằng COUNT(*) và GROUP BY.
+- AS group_statistics: Đặt bí danh cho bảng kết quả của truy vấn con.
+- Truy vấn chính: Lọc các nhóm có từ 2 sinh viên trở lên bằng WHERE total_students >= 2.
+
+![](./images/12.png)
