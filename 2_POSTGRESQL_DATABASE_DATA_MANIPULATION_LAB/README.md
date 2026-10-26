@@ -305,3 +305,19 @@ Giải thích
 - MAX(id_work): Giá trị lớn nhất là 5.
 
 ![](./images/8.png)
+
+### Nhiệm vụ 9. Sắp xếp dữ liệu giảm dần
+Sử dụng mệnh đề ORDER BY kết hợp với DESC để hiển thị các bản ghi theo thứ tự từ lớn đến nhỏ.
+
+```sql
+SELECT *
+FROM works
+ORDER BY id_work DESC;
+```
+
+Giải thích
+- ORDER BY id_work: Sắp xếp theo cột id_work.
+- DESC: Sắp xếp giảm dần, từ giá trị lớn nhất đến nhỏ nhất.
+
+![](./images/9.png)
+
