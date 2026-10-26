@@ -149,7 +149,7 @@ VALUES
 
 ![](./images/1.png)
 
-## Nhiệm vụ 2. Cập nhật dữ liệu dựa trên bảng khác
+### Nhiệm vụ 2. Cập nhật dữ liệu dựa trên bảng khác
 Sử dụng câu lệnh UPDATE để cập nhật các bản ghi trong một bảng dựa trên thông tin của bảng khác.
 
 Yêu cầu: Giữa hai bảng phải tồn tại mối quan hệ dữ liệu.
@@ -190,3 +190,23 @@ Minh họa mối quan hệ giữa hai bảng
 ![](./images/2.1.png)
 
 Liên kết qua student_name, lọc nhóm N3248 rồi cập nhật work_name.
+
+### Nhiệm vụ 3. Xóa dữ liệu dựa trên bảng khác
+Sử dụng câu lệnh DELETE để xóa nhiều bản ghi trong một bảng dựa trên thông tin được lưu trữ trong bảng khác.
+
+```sql
+DELETE FROM works AS w
+USING students AS s
+WHERE w.student_name = s.student_name
+AND s.student_group = 'N3248';
+```
+
+- DELETE FROM works AS w: Xóa bản ghi trong bảng works.
+
+- USING students AS s: Sử dụng thông tin từ bảng students.
+
+- WHERE w.student_name = s.student_name: Ghép các bản ghi có cùng tên sinh viên.
+
+- AND s.student_group = 'N3248': Chỉ xóa công việc của sinh viên thuộc nhóm N3248.
+
+![](./images/3.png)
