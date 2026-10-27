@@ -99,7 +99,9 @@ Thủ tục phải bảo đảm rằng:
 
 ## 5. THỰC HÀNH
 
-### Nhiệm vụ 1: Xây dựng thủ tục tổng hợp và cập nhật dữ liệu Viết một thủ tục thực hiện tổng hợp (Aggregation) các giá trị trong một bảng và cập nhật kết quả vào một bảng khác.
+### NHIỆM VỤ 1: TẠO PROCEDURE TỔNG HỢP VÀ CẬP NHẬT DỮ LIỆU
+
+Xây dựng thủ tục tổng hợp và cập nhật dữ liệu Viết một thủ tục thực hiện tổng hợp (Aggregation) các giá trị trong một bảng và cập nhật kết quả vào một bảng khác.
 
 Ta có các bảng và cấu trúc như sau:
 
@@ -181,3 +183,119 @@ ORDER BY id_student;
 - ORDER BY id_student: Sắp xếp kết quả theo mã sinh viên theo thứ tự tăng dần.
 
 ![](./images/1.3.png)
+
+### NHIỆM VỤ 2: TẠO TRIGGER TỰ ĐỘNG CẬP NHẬT DỮ LIỆU
+
+Viết một Trigger tự động thực hiện thao tác của Nhiệm vụ 1 khi thêm bản ghi mới vào bảng nguồn, nhằm bảo đảm dữ liệu tổng hợp luôn được cập nhật.
+
+chúng ta tạo Trigger để tự động gọi Procedure sau khi thêm bản ghi vào bảng works.
+
+Luồng hoạt động của Trigger:
+
+![](./images/2.1.png)
+
+- Tạo hàm Trigger:
+
+```sql
+CREATE OR REPLACE FUNCTION trigger_update_student_works()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    CALL update_student_works();
+    RETURN NEW;
+END;
+$$;
+```
+
+- CREATE OR REPLACE FUNCTION: Tạo mới hoặc thay thế hàm
+- trigger_update_student_works(): Tên hàm Trigger
+- RETURNS TRIGGER: Khai báo hàm được sử dụng bởi Trigger
+- LANGUAGE plpgsql: Sử dụng ngôn ngữ PL/pgSQL
+- BEGIN ... END: Khối lệnh thực thi
+- CALL update_student_works(): Gọi Procedure từ Nhiệm vụ 1
+- RETURN NEW: Trả về bản ghi mới trong ngữ cảnh Trigger
+
+![](./images/2.2.png)
+
+Tạo Trigger
+
+```sql
+CREATE TRIGGER trg_update_student_works
+AFTER INSERT ON works
+FOR EACH ROW
+EXECUTE FUNCTION trigger_update_student_works();
+```
+
+Giải thích câu lệnh:
+- CREATE TRIGGER trg_update_student_works: Tạo Trigger với tên trg_update_student_works.
+- AFTER INSERT ON works: Kích hoạt Trigger sau khi có bản ghi mới được thêm vào bảng works.
+- FOR EACH ROW: Thực thi Trigger cho mỗi bản ghi được thêm vào.
+- EXECUTE FUNCTION trigger_update_student_works(): Gọi hàm Trigger đã tạo ở Bước 2.
+
+![](./images/2.3.png)
+
+Kiểm tra hoạt động của Trigger
+
+Kiểm tra dữ liệu ban đầu:
+
+```sql
+SELECT id_student, student_name, total_works
+FROM students
+ORDER BY id_student;
+```
+![](./images/2.4.png)
+
+Thêm một bài thực hành cho Anna:
+
+```sql
+INSERT INTO works (id_work, work_name, student_name)
+SELECT COALESCE(MAX(id_work), 0) + 1,
+       'Trigger_Test',
+       'Anna'
+FROM works;
+
+```
+
+Giải thích:
+- INSERT INTO works: Thêm một bài thực hành mới.
+- COALESCE(MAX(id_work), 0) + 1: Lấy mã bài thực hành lớn nhất hiện có cộng thêm 1 (phù hợp để thử nghiệm trong lab).
+- 'Trigger_Test': Tên bài thực hành.
+- 'Anna': Sinh viên thực hiện bài thực hành.
+
+![](./images/2.5.png)
+
+Kiểm tra kết quả sau khi thêm
+
+```sql
+SELECT id_student, student_name, total_works
+FROM students
+ORDER BY id_student;
+```
+
+```sql
+SELECT s.student_name,
+       s.total_works,
+       COUNT(w.id_work) AS actual_works
+FROM students s
+LEFT JOIN works w
+    ON s.student_name = w.student_name
+GROUP BY s.id_student, s.student_name, s.total_works
+ORDER BY s.id_student;
+```
+
+SELECT: Lấy tên sinh viên, số bài đã lưu và số bài đếm thực tế.
+
+COUNT(w.id_work): Đếm số bài thực hành tương ứng với từng sinh viên.
+
+AS actual_works: Đặt tên cột kết quả là actual_works.
+
+LEFT JOIN: Kết hợp hai bảng, vẫn hiển thị sinh viên không có bài thực hành.
+
+ON: Xác định điều kiện liên kết thông qua student_name.
+
+GROUP BY: Nhóm dữ liệu theo từng sinh viên để thực hiện phép đếm.
+
+ORDER BY: Sắp xếp theo mã sinh viên tăng dần.
+
+![](./images/2.6.png)
