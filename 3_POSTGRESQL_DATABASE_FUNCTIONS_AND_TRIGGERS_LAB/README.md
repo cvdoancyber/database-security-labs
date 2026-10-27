@@ -99,3 +99,85 @@ Thủ tục phải bảo đảm rằng:
 
 ## 5. THỰC HÀNH
 
+### Nhiệm vụ 1: Xây dựng thủ tục tổng hợp và cập nhật dữ liệu Viết một thủ tục thực hiện tổng hợp (Aggregation) các giá trị trong một bảng và cập nhật kết quả vào một bảng khác.
+
+Ta có các bảng và cấu trúc như sau:
+
+![](./images/1.1.png)
+
+Ta thêm cột lưu kết quả tổng hợp:
+
+```sql
+ALTER TABLE students
+ADD COLUMN IF NOT EXISTS total_works INTEGER DEFAULT 0;
+```
+
+Giải thích
+
+- ALTER TABLE students: Thay đổi cấu trúc bảng students.
+- ADD COLUMN: Thêm một cột mới vào bảng.
+- IF NOT EXISTS: Chỉ thêm cột nếu cột chưa tồn tại, tránh phát sinh lỗi khi thực thi lại.
+- total_works: Tên cột dùng để lưu tổng số bài thực hành của mỗi sinh viên.
+- INTEGER: Kiểu dữ liệu số nguyên.
+- DEFAULT 0: Thiết lập giá trị mặc định bằng 0 nếu không cung cấp giá trị khi thêm bản ghi.
+
+Mục đích: Tạo cột total_works trong bảng students để lưu kết quả tổng hợp từ bảng works.
+
+![](./images/1.2.png)
+
+Tạo Procedure:
+
+```sql
+CREATE OR REPLACE PROCEDURE update_student_works()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE students s
+    SET total_works = (
+        SELECT COUNT(*)
+        FROM works w
+        WHERE w.student_name = s.student_name
+    );
+END;
+$$;
+```
+
+Giải thích:
+- CREATE OR REPLACE PROCEDURE: Tạo thủ tục mới hoặc thay thế thủ tục đã tồn tại.
+- update_student_works(): Tên thủ tục, không có tham số đầu vào.
+- LANGUAGE plpgsql: Xác định ngôn ngữ lập trình PL/pgSQL của PostgreSQL.
+- AS $$ ... $$: Đánh dấu phần nội dung của thủ tục.
+- BEGIN ... END: Xác định khối lệnh được thực thi.
+- UPDATE students s: Cập nhật dữ liệu trong bảng students, sử dụng bí danh s.
+- SET total_works = (...): Gán giá trị mới cho cột total_works.
+- SELECT COUNT(*): Đếm số bản ghi thỏa mãn điều kiện.
+- FROM works w: Lấy dữ liệu từ bảng works, sử dụng bí danh w.
+- WHERE w.student_name = s.student_name: Chỉ đếm các bài thực hành có tên sinh viên trùng với sinh viên đang được cập nhật.
+Nguyên lý hoạt động: Với mỗi sinh viên trong bảng students, thủ tục đếm số bài thực hành tương ứng trong bảng works, sau đó cập nhật kết quả vào cột total_works. Nếu không có bài thực hành nào, kết quả là 0.
+
+Thực thi Procedure:
+
+```sql
+CALL update_student_works();
+```
+
+- CALL: Lệnh gọi và thực thi thủ tục trong PostgreSQL.
+- update_student_works(): Thủ tục đã tạo ở bước trước.
+
+Kiểm tra:
+
+```sql
+SELECT id_student, student_name, student_group, total_works
+FROM students
+ORDER BY id_student;
+```
+
+- SELECT: Truy vấn dữ liệu từ bảng.
+- id_student: Hiển thị mã định danh sinh viên.
+- student_name: Hiển thị tên sinh viên.
+- student_group: Hiển thị nhóm của sinh viên.
+- total_works: Hiển thị tổng số bài thực hành đã được cập nhật.
+- FROM students: Xác định bảng lấy dữ liệu.
+- ORDER BY id_student: Sắp xếp kết quả theo mã sinh viên theo thứ tự tăng dần.
+
+![](./images/1.3.png)
